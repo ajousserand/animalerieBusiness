@@ -1,0 +1,13 @@
+App\Entity\Product:
+  product{0..25}:
+    label: '<word()>'
+    description: '<sentence(50)>'
+    price: '<numberBetween(1000,1000000)>'
+    stock: '<numberBetween(0,100)>'
+    isActive: '<numberBetween(0,1)>'
+    brand: '@brand*'
+    commands: '<numberBetween(0,3)>x @command*'
+    categories: '<numberBetween(0,3)>x @category*'
+    
+
+ 

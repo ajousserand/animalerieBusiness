@@ -1,0 +1,26 @@
+App\Entity\Category:
+  category0:
+    label: 'Chien'
+  category1:
+    label: 'Chat'
+  category2:
+    label: 'Poisson'
+  category3:
+    label: 'Vivarium'
+  category4:
+    label: 'Basse-cour'
+  category5:
+    label: 'Dog Food'
+    categoryParent: '@category0'
+  category6:
+    label: 'Cat Food'
+    categoryParent: '@category1'
+  category7:
+    label: 'Reptile Food'
+    categoryParent: '@category2'
+  category8:
+    label: 'Fish Food'
+    categoryParent: '@category3'
+  category9:
+    label: 'Chicken Food'
+    categoryParent: '@category4'

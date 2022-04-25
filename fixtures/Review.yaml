@@ -1,0 +1,8 @@
+App\Entity\Review:
+  review{0..14}:
+    note: '<numberBetween(0, 20)>'
+    content: '<sentence(20)>'
+    createdAt: '<dateTimeBetween("-1000 days", "now")>'
+    user: '@user*'
+    product: '@product*'
+    

@@ -1,0 +1,5 @@
+App\Entity\Address:
+  address{0..25}:
+    streetNumber: '<numberBetween(0, 100)>'
+    streetName: '<sentence(5)>'
+    city: '@city*'

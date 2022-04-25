@@ -1,0 +1,15 @@
+parameters:
+  genreType: [Homme,Femme,Autres]
+
+App\Entity\User:
+  user{0..25}:
+    email (unique): '<email()>'
+    password: '\$2y\$13\$CmpIg5fHROATvMpk//PaG.LNyaewwH1GCeNomYAmWc4KHBAeTyOhm'
+    firstName: '<firstName()>'
+    lastname: '<lastName()>'
+    roles: ["ROLE_USER"]
+    birthDate: '<date_create()>'
+    genre: '<randomElement($genreType)>'
+    addresses: '<numberBetween(1,3)>x @address*'
+
+ 

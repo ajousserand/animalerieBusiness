@@ -1,0 +1,11 @@
+parameters:
+  statusType: [100,200,300,400]
+
+App\Entity\Command:
+  command{0..25}:
+    totalPrice: '<numberBetween(1000,1000000)>'
+    numCommand: 'word()'
+    createdAt: '<dateTimeBetween("-1000 days", "now")>'
+    status: '<randomElement($statusType)>'
+    address: '@address*'
+    user: '@user*'

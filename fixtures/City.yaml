@@ -1,0 +1,4 @@
+App\Entity\City:
+  city{0..10}:
+    name: '<city()>'
+    cp: '<numberBetween(10000, 99999)>'
