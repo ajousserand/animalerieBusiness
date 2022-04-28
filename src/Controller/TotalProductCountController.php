@@ -31,9 +31,9 @@ class TotalProductCountController extends AbstractController
         }
 
         if($commandEntities!=0){
-            return $this->json(number_format($sum/count($commandEntities),2,".",""));
+            return $this->json(['data'=>number_format($sum/count($commandEntities),2,".","")]);
         }else;{
-            return $this->json(0);
+            return $this->json(['data'=>0]);
         }
     }
    

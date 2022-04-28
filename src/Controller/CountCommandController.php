@@ -32,7 +32,7 @@ class CountCommandController extends AbstractController
         dump($commandEntities);
        
 
-        return $this->json(count($commandEntities));
+        return $this->json(['data'=>count($commandEntities)]);
     }
    
 }

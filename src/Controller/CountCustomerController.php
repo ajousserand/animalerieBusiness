@@ -32,7 +32,7 @@ class CountCustomerController extends AbstractController
         dump($userEntities);
        
 
-        return $this->json(count($userEntities));
+        return $this->json(['data'=>count($userEntities)]);
     }
    
 }

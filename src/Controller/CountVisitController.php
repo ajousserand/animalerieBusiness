@@ -34,6 +34,6 @@ class CountVisitController extends AbstractController
 
         dump($visitEntities);
 
-        return $this->json(count($visitEntities));
+        return $this->json(['data'=>count($visitEntities)]);
     }
 }
