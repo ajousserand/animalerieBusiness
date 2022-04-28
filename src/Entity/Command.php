@@ -19,6 +19,7 @@ use App\Controller\CountPanierController;
 use App\Controller\PanierAbandonnerController;
 use App\Controller\RecurrenceClientController;
 use App\Controller\TotalPanierMoyenController;
+use App\Controller\TotalProductCountController;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
 #[ApiResource(

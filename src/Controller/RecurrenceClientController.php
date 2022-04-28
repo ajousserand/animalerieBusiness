@@ -30,7 +30,7 @@ class RecurrenceClientController extends AbstractController
 
        
         if(count($commandNewClientEntities)!= 0 && count($commandOldClientEntities)!= 0){
-            return $this->json(number_format(count($commandNewClientEntities)/count($commandOldClientEntities)*100,2));
+            return $this->json(number_format((count($commandNewClientEntities)/count($commandOldClientEntities))*100,2));
         }else{
             return($this->json(0));
         }

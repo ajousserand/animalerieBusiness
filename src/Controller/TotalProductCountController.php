@@ -6,8 +6,6 @@ use App\Repository\CommandRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class TotalProductCountController extends AbstractController
 {
@@ -25,7 +23,6 @@ class TotalProductCountController extends AbstractController
         $minDate = new DateTime ($minDateString);
         $maxDate = new DateTime($maxDateString);
         
-
         $commandEntities = $this->commandRepository->getTotalVenteBetweenDate($minDate,$maxDate);
 
         $sum=0;
@@ -33,9 +30,8 @@ class TotalProductCountController extends AbstractController
             $sum +=$commandEntity->getTotalPrice();
         }
 
-
         if($commandEntities!=0){
-            return $this->json($sum/count($commandEntities));
+            return $this->json(number_format($sum/count($commandEntities),2,".",""));
         }else;{
             return $this->json(0);
         }

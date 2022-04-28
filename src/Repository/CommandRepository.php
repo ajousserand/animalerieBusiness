@@ -52,6 +52,7 @@ class CommandRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->where('c.createdAt>= :date_min')
         ->andWhere('c.createdAt<= :date_max')
+        ->andWhere('c.status=200 OR c.status=300')
         ->setParameter('date_min',$minDate)
         ->setParameter('date_max',$maxDate)
         ->getQuery()->getResult();

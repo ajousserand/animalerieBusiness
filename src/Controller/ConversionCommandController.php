@@ -19,12 +19,14 @@ class ConversionCommandController extends AbstractController
     
     public function __invoke(Request $request)
     {
+        dump($this->getUser());
         $minDateString = $request->query->get(key:'min_date');
         $maxDateString = $request->query->get(key:'max_date');
 
         $minDate = new DateTime ($minDateString);
         $maxDate = new DateTime($maxDateString);
         
+       
 
         $panierEntities = $this->commandRepository->getCountPanier($minDate,$maxDate);
         $commandEntities = $this->commandRepository->getCountCommandBetweenDate($minDate,$maxDate);

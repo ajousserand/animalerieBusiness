@@ -34,7 +34,7 @@ class TotalPanierMoyenController extends AbstractController
         }
 
         if($commandEntities!=0){
-        return $this->json($sum/count($commandEntities));
+        return $this->json(number_format($sum/count($commandEntities),2,".",""));
         }else;{
             return $this->json(0);
         }
