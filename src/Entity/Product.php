@@ -2,48 +2,88 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ApiResource(
+    collectionOperations:['get','post'],
+    itemOperations:['get'],
+    normalizationContext:['groups'=>['product']]
+)]
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['review','productPicture','brand','command','category','product'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:"Le label ne doit pas être vide"),
+    Assert\NotNull(message:"Le label ne doit pas être nulle"),
+    Assert\Type(type:"string", message:"Le label doit être une chaine de caractère"),
+    Assert\Length(min:5,max:50,minMessage:"Le label est trop petit",maxMessage:"Le label est trop grand")]
+    #[Groups(['review','productPicture','brand','command','category','product','user'])]
     private $label;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message:"La description ne doit pas être vide"),
+    Assert\NotNull(message:"La description ne doit pas être nulle"),
+    Assert\Type(type:"string", message:"La description doit être une chaine de caractère"),
+    Assert\Length(min:10,max:5000,minMessage:"La description est trop petit",maxMessage:"La description est trop grand")]
+    #[Groups(['product'])]
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message:"Le prix ne doit pas être vide"),
+      Assert\NotNull(message:"Le prix ne doit pas être nulle"),
+      Assert\Positive(message:"Le prix doit être positif"),
+      Assert\Type(type:"integer", message:"Le prix doit être un chiffre")
+    ]
+    #[Groups(['review','command','product'])]
     private $price;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\NotBlank(message:"Le stock ne doit pas être vide"),
+      Assert\NotNull(message:"Le stock ne doit pas être nulle"),
+      Assert\Positive(message:"Le stock doit être positif"),
+      Assert\Type(type:"integer", message:"Le stock doit être un chiffre")
+    ]
+    #[Groups(['product'])]
     private $stock;
 
     #[ORM\Column(type: 'boolean')]
+    #[Assert\NotBlank(message:"La validité ne doit pas être vide"),
+      Assert\NotNull(message:"La validité ne doit pas être nulle"),
+      Assert\Type(type:'boolean',message:"La validité doit être booléen")]
+      #[Groups(['product'])]
     private $isActive;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class)]
+    #[Groups(['product'])]
     private $productPictures;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'products')]
+    #[Groups(['product'])]
     private $categories;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['product'])]
     private $brand;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class)]
+    #[Groups(['product'])]
     private $reviews;
 
     #[ORM\ManyToMany(targetEntity: Command::class, mappedBy: 'products')]
+    #[Groups(['product'])]
     private $commands;
 
     public function __construct()

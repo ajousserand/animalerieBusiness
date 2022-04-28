@@ -11,5 +11,6 @@ App\Entity\User:
     birthDate: '<date_create()>'
     genre: '<randomElement($genreType)>'
     addresses: '<numberBetween(1,3)>x @address*'
+    createdAt: '<dateTimeBetween("-1000 days", "now")>'
 
  

@@ -47,6 +47,82 @@ class CommandRepository extends ServiceEntityRepository
         }
     }
 
+    public function getTotalVenteBetweenDate($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt>= :date_min')
+        ->andWhere('c.createdAt<= :date_max')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+
+    }
+
+    public function getCountCommandBetweenDate($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt>= :date_min')
+        ->andWhere('c.createdAt<= :date_max')
+        ->andWhere('c.status= 200 OR c.status= 300 OR c.status= 400 OR c.status= 500')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+
+    }
+    public function getCountPanier($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt>= :date_min')
+        ->andWhere('c.createdAt<= :date_max')
+        ->andWhere('c.status= 100')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+
+    }
+
+    public function getCountCommandeNewClient($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->innerJoin('c.user', 'u')
+        ->where('c.createdAt>= :date_min')
+        ->andWhere('c.createdAt<= :date_max')
+        ->andWhere('u.createdAt>= :date_min')
+        ->andWhere('u.createdAt<= :date_max')
+        ->andWhere('c.status= 200 OR c.status= 300')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+
+    }
+
+    public function getCountCommandeOldClient($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->innerJoin('c.user', 'u')
+        ->where('c.createdAt>= :date_min')
+        ->andWhere('c.createdAt<= :date_max')
+        ->andwhere('u.createdAt<= :date_min')
+        ->andWhere('c.status= 200 OR c.status= 300')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+
+    }
+
+    public function getCommandBetweenDate($minDate,$maxDate)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.createdAt>= :date_min')
+        ->andWhere('c.createdAt<= :date_max')
+        ->andWhere('c.status= 200 OR c.status= 300')
+        ->setParameter('date_min',$minDate)
+        ->setParameter('date_max',$maxDate)
+        ->getQuery()->getResult();
+
+    }
+  
+
     // /**
     //  * @return Command[] Returns an array of Command objects
     //  */

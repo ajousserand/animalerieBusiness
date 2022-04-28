@@ -2,30 +2,54 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
+#[ApiResource(
+    collectionOperations:['get','post'],
+    itemOperations:['get'],
+    normalizationContext:['groups'=>['address']]
+)]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'streetNumber' => 'exact', 'streetName' => 'partial'])]
 class Address
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['address','command','city'])]
     private $id;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Positive(message:"Le numéro de la rue doit être positif"),
+    Assert\Type(type:"integer", message:"Le numero de la rue doit être un chiffre entier")
+    ]
+    #[Groups(['user','address','command','city'])]
     private $streetNumber;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:"Le nom de la rue ne doit pas être vide"),
+      Assert\NotNull(message:"Le nom de la rue ne doit pas être nulle"),
+      Assert\Length(min:5,max:100, minMessage:"Le nom de rue doit être plus long",maxMessage:"Le nom de rue doit être plus court"),
+      Assert\Type(type:"string", message:"Le numero de rue doit être une chaine de caractère")
+      ]
+      #[Groups(['user','address','command','city'])] 
     private $streetName;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'addresses')]
+    #[Groups(['address'])]
     private $users;
 
     #[ORM\ManyToOne(targetEntity: City::class, inversedBy: 'addresses')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['address'])]
     private $city;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Command::class)]

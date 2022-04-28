@@ -3,18 +3,28 @@
 {% block title %}Hello HomepageController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-success">
+  <a class="navbar-brand" href="#">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/HB/Desktop/animalerieBusiness/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/HB/Desktop/animalerieBusiness/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code></li>
-    </ul>
-</div>
+  <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarSupportedContent">
+      <form class="form-inline d-flex justify-content-around  my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher..." aria-label="Search">
+        <button class="btn btn-outline-warning mx-3 my-2 my-sm-0" type="submit">Rechercher</button>
+      </form>
+  </div>
+  <div class="d-flex justify-content-around text-warning" id="navbarSupportedContent">
+    <a>Inscription</a>
+    <p class="ms-3 me-3">|</p>
+    <a>Connexion</a>
+  </div>
+</nav>
+<main>
+<p>En travaux</p>
+</main>
+<footer class="bg-success footer fixed-bottom">
+  <a>copyright</a>
+</footer>
 {% endblock %}

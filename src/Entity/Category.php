@@ -2,29 +2,47 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ApiResource(
+    collectionOperations:['get','post'],
+    itemOperations:['get'],
+    normalizationContext:['groups'=>['category']]
+)]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['category','product'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:"Le label ne doit pas être vide"),
+      Assert\NotNull(message:"Le label ne doit pas être nulle"),
+      Assert\Length(min:5,max:50,minMessage:"Le label est trop petit",maxMessage:"Le label est trop grand"),
+      Assert\Type(type:"string", message:"Le label doit être une chaine de caractère"),]
+      #[Groups(['category','product'])]
     private $label;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    #[Groups(['category'])]
     private $categoryParent;
 
     #[ORM\OneToMany(mappedBy: 'categoryParent', targetEntity: self::class)]
+    #[Groups(['category'])]
     private $categories;
 
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'categories')]
+    #[Groups(['category'])]
     private $products;
 
     public function __construct()
