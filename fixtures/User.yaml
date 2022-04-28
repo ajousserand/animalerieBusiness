@@ -4,12 +4,12 @@ parameters:
 App\Entity\User:
   user0:
     email: 'toto@gmail.com'
-    password: '\$2y\$13\$Epy9DjMY99DVSGF7F/4VYeOFfeaoKIlEcPU8.R9KgFaPerPb3mC4q'
+    password: '\$2y\$13\$7i2cliTPkDeBBnic03Eyau87H95wDWvnzbdx3G.2iZlIkGtkayhTq'
     firstName: '<firstName()>'
-    lastname: '<lastName()>'
+    lastname: 'Capart'
     roles: ["ROLE_ADMIN"]
     birthDate: '<date_create()>'
-    genre: '<randomElement($genreType)>'
+    genre: '$genreType[0]'
     addresses: '<numberBetween(1,3)>x @address*'
     createdAt: '<dateTimeBetween("-1000 days", "now")>'
 
