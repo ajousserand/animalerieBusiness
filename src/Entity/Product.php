@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\TotalProductSoldDescController;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,7 +13,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
-    collectionOperations:['get','post'],
+    collectionOperations:['get','post',
+    'get_total_product_from_dates' => [
+        'method'=>'GET',
+        'path'=> '/product/get_total_product',
+        'controller'=> TotalProductSoldDescController::class
+    ]],
     itemOperations:['get'],
     normalizationContext:['groups'=>['product']]
 )]
