@@ -47,6 +47,8 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    
+
     public function getTotalProductSoldDesc($minDate,$maxDate){
         return $this->createQueryBuilder("p")
                     ->select('COUNT(command) as totalVente','p.label as produit')

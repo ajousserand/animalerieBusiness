@@ -44,6 +44,7 @@ class Address
     private $streetName;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'addresses')]
+    #[ORM\JoinColumn(nullable: false)]
     #[Groups(['address'])]
     private $users;
 
@@ -53,6 +54,7 @@ class Address
     private $city;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Command::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $commands;
 
     public function __construct()

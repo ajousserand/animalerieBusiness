@@ -1,45 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-front.html.twig' %}
 
-{% block title %}Page d'accueil{% endblock %}
+{% block title %}
+    {{"home.title"|trans}}
+{% endblock %}
 
 {% block body %}
- <header id="header" class="bg-success">
-    <div class="container">
-      <h1 class="d-none">La Nîmes'alerie</h1>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-
-        <a class="navbar-brand" href="#"><img src="{{asset('build/images/logo.png')}}" alt="Logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Acceuil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Chiens</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Chats</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#">Poissons</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#">Vivariums</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#">Basse-cour</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-
-  </header>
   <!-- Main part -->
   <main>
     <!-- Welcoming!! -->

@@ -3,8 +3,8 @@ parameters:
 
 App\Entity\User:
   user0:
-    email: 'toto@gmail.com'
-    password: '\$2y\$13\$7i2cliTPkDeBBnic03Eyau87H95wDWvnzbdx3G.2iZlIkGtkayhTq'
+    email: 'capriatti.tony@gmail.com'
+    password: '\$2y\$13\$DZ.Sc7G9Iz3IKbH0gFWRHudYurSv5DA0lWqgIoP7Cu11A/2xpSP1W'
     firstName: '<firstName()>'
     lastname: 'Capart'
     roles: ["ROLE_ADMIN"]
@@ -15,7 +15,7 @@ App\Entity\User:
 
   user{1..100}:
     email (unique): '<email()>'
-    password: '\$2y\$13\$CmpIg5fHROATvMpk//PaG.LNyaewwH1GCeNomYAmWc4KHBAeTyOhm'
+    password: '\$2y\$13\$DZ.Sc7G9Iz3IKbH0gFWRHudYurSv5DA0lWqgIoP7Cu11A/2xpSP1W'
     firstName: '<firstName()>'
     lastname: '<lastName()>'
     roles: ["ROLE_USER"]

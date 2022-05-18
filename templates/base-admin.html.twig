@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+          <header>
+                {% block header %}
+                
+                {% endblock %}
+            </header>
+            <div class="row">
+            <div class="col-2">
+                {% include "commons/_sidebar.html.twig" %}
+                </div>
+        
+            <div class="col-10 ">
+                {% block body %}
+                
+                {% endblock %}
+            </div>
+    </div>
+</div>
+
+{% endblock %}

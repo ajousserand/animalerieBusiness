@@ -1,0 +1,44 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <h1>Product index </h1>
+
+    <table class="table table-dark table-sniped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>IsActive</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.label }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.isActive ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_product_crud_show', {'id': product.id}) }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a href="{{ path('app_product_crud_edit', {'id': product.id}) }}"><i class="fa-solid fa-pencil"></i></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_product_crud_new') }}">Create new</a>
+    {{ knp_pagination_render(products) }}
+{% endblock %}

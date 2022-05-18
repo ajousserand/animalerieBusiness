@@ -1,0 +1,47 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}
+    {{"home.title"|trans}}
+{% endblock %}
+
+{% block body %}
+<div>
+    <h2>Dernières commandes :</h2>
+    <table class="table table-striped table-dark">
+        <tr>
+            <th>Numero de commande</th>
+            <th>Client</th>
+            <th>Créée le</th>
+            <th>Prix</th>
+        </tr>
+        {% for command in commands %}
+        <tr>
+            <td>{{command.numCommand}}</td>
+            <td>{{command.user.firstname}} {{command.user.lastname}}</td>
+            <td>{{command.createdAt|date('d/m/Y')}}</td>
+            <td>{{command.totalPrice}} €</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div>
+    <h2>Dernier client inscrit :</h2>
+    <table class="table table-striped table-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Créée le</th>
+            <th>email</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{user.lastname}}</td>
+            <td>{{user.firstname}} </td>
+            <td>{{user.createdAt|date('d/m/Y')}}</td>
+            <td>{{user.email}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

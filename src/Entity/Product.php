@@ -89,6 +89,7 @@ class Product
     private $reviews;
 
     #[ORM\ManyToMany(targetEntity: Command::class, mappedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
     #[Groups(['product'])]
     private $commands;
 
