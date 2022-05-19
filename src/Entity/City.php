@@ -48,6 +48,7 @@ class City
     private $cp;
 
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Address::class)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['city'])]
     private $addresses;
 

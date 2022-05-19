@@ -5,7 +5,7 @@
 {% block body %}
 
 <h1>{{product.label}}</h1>
-<a href="" class="btn btn-success">Ajouter au panier</a>
+<a href="{{path('app_add_basket', {id:product.id})}}" class="btn btn-success">Ajouter au panier</a>
 
 
 {% endblock %}

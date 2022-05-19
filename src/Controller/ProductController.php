@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
+use App\Service\BasketService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends AbstractController
 {
 
-    public function __construct(private ProductRepository $productRepository, private PaginatorInterface $paginator,)
+    public function __construct(private ProductRepository $productRepository, private PaginatorInterface $paginator,private BasketService $basketService)
     {
         
     }
@@ -40,11 +42,29 @@ class ProductController extends AbstractController
     {
 
         $productEntity = $this->productRepository->findOneBy(['id'=>$id]);
-
+        
         
         return $this->render('products/show.html.twig', [
             'product'=>$productEntity,
-            
         ]);
+    }
+
+
+    #[Route('/product/{id}/panier/add', name: 'app_add_basket')]
+    public function addBasket(Request $request, Product $product): Response
+    {
+        $user = $this->getUser();
+        $this->basketService->addProductToBasket($product, $user);
+        
+        return $this->redirectToRoute('app_user_basket');
+    }
+
+    #[Route('/product/{id}/panier/remove', name: 'app_remove_basket')]
+    public function removeBasket(Request $request, Product $product): Response
+    {
+        $user = $this->getUser();
+        $this->basketService->removeProductToBasket($product, $user);
+     
+        return $this->redirectToRoute('app_user_basket');
     }
 }

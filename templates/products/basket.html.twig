@@ -1,0 +1,23 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Le panier{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for article in basket.products %}
+            <div class="col-12 bg-success d-flex justify-content-between text-white my-2 py-2">
+                <a href="{{path('app_show_product',{id:article.id})}}" class="text-white text-decoration-none">{{article.label}}</a>
+                <p class="my-0">{{article.price}} €</p>
+                <a href="{{path('app_remove_basket', {id:article.id})}}" class="text-white border-start" >Supprimer</a>
+            </div>
+        {% endfor %}
+          <div class="col-12 d-flex justify-content-between">
+        <a href="{{path('app_products')}}" class="btn btn-success">Continuer les achats</a>
+
+        <a href="" class="">Supprimer tous les articles</a>
+    </div>
+    </div>
+  
+</div>
+{% endblock %}

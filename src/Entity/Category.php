@@ -42,6 +42,7 @@ class Category
     private $categories;
 
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'categories')]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['category'])]
     private $products;
 

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Command;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -120,6 +121,17 @@ class CommandRepository extends ServiceEntityRepository
         ->setParameter('date_min',$minDate)
         ->setParameter('date_max',$maxDate)
         ->getQuery()->getResult();
+
+    }
+
+    public function getBasketByUser(User $user)
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.user = :user')
+        ->andWhere('c.status = 100')
+        ->setParameter('user',$user)
+        ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
 
     }
   

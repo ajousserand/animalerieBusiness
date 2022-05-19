@@ -86,7 +86,7 @@ class Command
       Assert\GreaterThan(value:0,message:"Le prix total doit être supérieur à 0"),
     ]
     #[Groups(['user','command'])]
-    private $totalPrice;
+    private $totalPrice = 0;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message:"Le numéro de commande ne doit pas être vide"),
@@ -117,16 +117,17 @@ class Command
     private $status;
 
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'commands')]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['command'])]
     private $products;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commands')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['command'])]
-    private $user;
+    private $user = null;
 
     #[ORM\ManyToOne(targetEntity: Address::class, inversedBy: 'commands')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['command'])]
     private $address;
 

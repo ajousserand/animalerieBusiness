@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Command;
+use App\Service\BasketService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,32 +12,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommandController extends AbstractController
 {
+    public function __construct(private BasketService $basketService)
+    {
+
+    }
+
     #[Route('/panier', name: 'app_panier')]
     public function panier(EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
-        $panier = new Command();
-        $panier->setUser($user);
-        $panier->setCreatedAt(new DateTime('now'));
-        $panier->setStatus(100);
-
-
-
+        $basket = $this->basketService->addProductToBasket($Product,$user);
+       
         return $this->render('command/panier.html.twig', [
-            'controller_name' => 'CommandController',
+            'panier' => $basket,
         ]);
     }
 
-    #[Route('/panier', name: 'app_panier')]
-    public function createCommand(): Response
-    {
-        $user = $this->getUser();
-        $panier = new Command();
-
-
-
-        return $this->render('command/panier.html.twig', [
-            'controller_name' => 'CommandController',
-        ]);
-    }
 }

@@ -43,6 +43,7 @@ class Brand
     private $imagePath;
 
     #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Product::class)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['brand'])]
     private $products;
 

@@ -68,17 +68,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastName;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class, cascade:['remove','persist'])]
+    #[ORM\JoinColumn(nullable: false)]
     #[Groups(['user'])]
     private $reviews;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Command::class,cascade:['persist'] )]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Command::class)]
     #[Groups(['user'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $commands;
 
     #[ORM\ManyToMany(targetEntity: Address::class, mappedBy: 'users')]
     #[Groups(['user'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $addresses;
 
     #[ORM\Column(type: 'string', length: 255)]

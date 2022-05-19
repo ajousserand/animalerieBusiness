@@ -71,11 +71,13 @@ class Product
       #[Groups(['product'])]
     private $isActive;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class, cascade:["persist", "remove"])]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['product'])]
     private $productPictures;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'products')]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['product'])]
     private $categories;
 
@@ -84,12 +86,13 @@ class Product
     #[Groups(['product'])]
     private $brand;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class, cascade:["persist", "remove"])]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['product'])]
     private $reviews;
 
     #[ORM\ManyToMany(targetEntity: Command::class, mappedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Groups(['product'])]
     private $commands;
 
